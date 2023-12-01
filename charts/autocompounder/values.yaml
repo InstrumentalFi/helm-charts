@@ -1,3 +1,11 @@
+cronjobs:
+  bond:
+    schedule: "*/5 * * * *"
+  ccompound:
+    schedule: "*/5 * * * *"
+  get_rewards:
+    schedule: "*/5 * * * *"
+
 image:
   repository: ghcr.io/instrumentalfi/compoundr
   pullPolicy: IfNotPresent
