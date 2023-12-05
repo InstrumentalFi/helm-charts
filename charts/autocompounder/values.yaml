@@ -1,10 +1,18 @@
 cronjobs:
   bond:
     schedule: "*/5 * * * *"
-  ccompound:
+  compound:
     schedule: "*/5 * * * *"
   get_rewards:
     schedule: "*/5 * * * *"
+
+appConfig:
+  env: {}
+
+appSecret:
+  enabled: true
+  env: {}
+
 
 image:
   repository: ghcr.io/instrumentalfi/compoundr

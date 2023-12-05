@@ -1,7 +1,7 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: my-cronjob-1
+  name: compound
   labels:
     {{- include "autocompounder.labels" . | nindent 4 }}
 spec:
@@ -10,11 +10,18 @@ spec:
     spec:
       template:
         spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: OnFailure
           containers:
-          - name: my-cronjob-container
-            image: your-image
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            args:
+              - "compound"
             envFrom:
               - configMapRef:
-                  name: my-configmap
+                  name: {{ .Chart.Name }}
               - secretRef:
-                  name: my-secret
+                  name: {{ .Chart.Name }}
