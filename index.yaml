@@ -3,6 +3,16 @@ entries:
   autocompounder:
   - apiVersion: v2
     appVersion: 0.0.6
+    created: "2023-12-05T11:59:21.146041094Z"
+    description: A Helm chart for Kubernetes
+    digest: bab0d8e860804c71fc69699e381b0e21ab7e18397a6c0fe8ada6977efa9c34ae
+    name: autocompounder
+    type: application
+    urls:
+    - https://github.com/InstrumentalFi/helm-charts/releases/download/autocompounder-0.1.1/autocompounder-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.0.6
     created: "2023-12-01T15:32:05.717454126Z"
     description: A Helm chart for Kubernetes
     digest: 83cc5d9fbcb107721388ade47e22af3c6d96160c9bf9515275be79750a0b4eca
@@ -22,4 +32,4 @@ entries:
     urls:
     - https://github.com/InstrumentalFi/helm-charts/releases/download/example-0.1.0/example-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-01T15:32:05.717481807Z"
+generated: "2023-12-05T11:59:21.146075839Z"
