@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    {{- include "autocompounder.labels" . | nindent 4 }}
+data:
+{{- range $key, $value := .Values.appConfig.env }}
+  {{ $key | quote }}: {{ $value | quote }}
+{{- end }}
