@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ibctransfer
+  labels:
+    {{- include "autocompounder.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.cronjobs.ibctransfer.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: OnFailure
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            args:
+            - "ibctransfer"
+            envFrom:
+              - configMapRef:
+                  name: {{ .Chart.Name }}
+              - secretRef:
+                  name: {{ .Chart.Name }}

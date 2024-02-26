@@ -5,6 +5,8 @@ cronjobs:
     schedule: "*/5 * * * *"
   get_rewards:
     schedule: "*/5 * * * *"
+  ibctransfer:
+    schedule: "*/5 * * * *"
 
 appConfig:
   env: {}
