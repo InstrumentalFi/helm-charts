@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: ibctransfer
+  name: {{ .Release.Name }}-ibctransfer
   labels:
     {{- include "autocompounder.labels" . | nindent 4 }}
 spec:
@@ -22,6 +22,9 @@ spec:
             - "ibctransfer"
             envFrom:
               - configMapRef:
-                  name: {{ .Chart.Name }}
-              - secretRef:
-                  name: {{ .Chart.Name }}
+                  name: {{ .Release.Name }}
+                  {{- if .Values.appSecret.enabled }}
+                  name: {{ .Release.Name }}
+                  {{- else }}
+                  name: {{ .Values.appSecret.externalSecretName }}
+                  {{- end }}

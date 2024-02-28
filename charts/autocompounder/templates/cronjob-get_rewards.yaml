@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: get-rewards
+  name: {{ .Release.Name }}-get-rewards
   labels:
     {{- include "autocompounder.labels" . | nindent 4 }}
 spec:
@@ -22,6 +22,10 @@ spec:
             - "get-rewards"
             envFrom:
               - configMapRef:
-                  name: {{ .Chart.Name }}
+                  name: {{ .Release.Name }}
               - secretRef:
-                  name: {{ .Chart.Name }}
+                  {{- if .Values.appSecret.enabled }}
+                  name: {{ .Release.Name }}
+                  {{- else }}
+                  name: {{ .Values.appSecret.externalSecretName }}
+                  {{- end }}
