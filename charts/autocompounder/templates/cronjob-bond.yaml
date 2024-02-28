@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: bond
+  name: {{ .Release.Name }}-bond
   labels:
     {{- include "autocompounder.labels" . | nindent 4 }}
 spec:
@@ -22,8 +22,12 @@ spec:
               - "bond"
             envFrom:
               - configMapRef:
-                  name: {{ .Chart.Name }}
+                  name: {{ .Release.Name }}
               - secretRef:
-                  name: {{ .Chart.Name }}
+                  {{- if .Values.appSecret.enabled }}
+                  name: {{ .Release.Name }}
+                  {{- else }}
+                  name: {{ .Values.appSecret.externalSecretName }}
+                  {{- end }}
 
                   

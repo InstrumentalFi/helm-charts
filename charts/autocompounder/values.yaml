@@ -13,6 +13,7 @@ appConfig:
 
 appSecret:
   enabled: true
+  externalSecretName: ""
   env: {}
 
 
